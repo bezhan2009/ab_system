@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package telegram_bot.v1;
+
+option go_package = "gen/telegram_notifications/v1;telegramv1";
+
+service TelegramBotService {
+  rpc Notify(NotifyRequest) returns (NotifyResponse);
+  rpc Health(HealthRequest) returns (HealthResponse);
+  rpc Ready(ReadyRequest) returns (ReadyResponse);
+}
+
+message NotifyRequest {
+  string event_type    = 1;
+  string experiment_id = 2;
+  string experiment    = 3;
+  string flag_key      = 4;
+  string user_id       = 5;
+  string status        = 6;
+  string metric        = 7;
+  string threshold     = 8;
+  string value         = 9;
+  string message       = 10;
+  string report_url    = 11;
+  string timestamp     = 12;
+}
+
+message NotifyResponse {
+  string message = 1;
+}
+
+message HealthRequest {}
+
+message HealthResponse { string status = 1; }
+
+message ReadyRequest {}
+
+message ReadyResponse { string status = 1; }

@@ -1,0 +1,25 @@
+FROM golang:1.25-alpine AS builder
+WORKDIR /app
+COPY go.mod go.sum ./
+RUN go mod download
+COPY . .
+RUN go build -o /app/bin/api ./cmd/ab_system
+
+FROM alpine:latest
+RUN apk --no-cache add ca-certificates
+WORKDIR /root/
+
+# Копируем бинарник
+COPY --from=builder /app/bin/api .
+
+# Копируем конфиги из builder (из папки configs, которая была скопирована на этапе builder)
+COPY --from=builder /app/configs ./configs
+
+# ЭТА СТРОКА НЕ НУЖНА - она вызывает ошибку
+# COPY ./ab_system/configs ./configs
+
+# ИСПРАВЛЕННАЯ СТРОКА для .env
+COPY ./.env .
+
+EXPOSE 8086
+CMD ["./api"]

@@ -1,0 +1,21 @@
+FROM golang:1.25-alpine AS builder
+WORKDIR /app
+COPY go.mod go.sum ./
+RUN go mod download
+COPY . .
+RUN go build -o /app/bin/bot ./cmd/telegram_bot
+
+FROM alpine:latest
+RUN apk --no-cache add ca-certificates
+WORKDIR /root/
+
+COPY --from=builder /app/bin/bot .
+
+# Копируем конфиги из builder
+COPY --from=builder /app/configs ./configs
+
+# Копируем .env из контекста сборки
+COPY ./.env .
+
+EXPOSE 50051
+CMD ["./bot"]

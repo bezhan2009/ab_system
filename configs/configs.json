@@ -1,0 +1,41 @@
+{
+  "log_params": {
+    "log_directory": "logs",
+    "log_info": "info.log",
+    "log_error": "error.log",
+    "log_warn": "warn.log",
+    "log_debug": "debug.log",
+    "max_size_megabytes": 10,
+    "max_backups": 4,
+    "max_age": 30,
+    "compress": true,
+    "local_time": true
+  },
+  "app_params": {
+    "gin_mode": "debug",
+    "port_run": "8086",
+    "server_url": "localhost",
+
+    "server_name": "ab_system v1.0"
+  },
+  "server_params": {
+    "addr": ":",
+    "max_header_mbs": 1,
+    "read_timeout_seconds": 10,
+    "write_timeout_seconds": 10
+  },
+  "guardrail_params": {
+    "checker_ticket_minutes": 1
+  },
+  "autopilot_params": {
+    "checker_ticket_minutes": 10
+  },
+  "clients": {
+    "telegram_notifications": {
+      "address": "telegram_bot:50051"
+    }
+  },
+  "notification_params": {
+    "ttl_notifications_minutes": 120
+  }
+}
