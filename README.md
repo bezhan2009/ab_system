@@ -50,4 +50,4 @@
 --- 
 
 ### Additionally
-**You can also find the task of this project [here](https://github.com/Central-University-IT-prod/2025-2026-tasks/blob/main/Indiv/Backend/task-en.md)**
+**The original project specification is also available [here](https://github.com/Central-University-IT-prod/2025-2026-tasks/blob/main/Indiv/Backend/task-en.md)**
